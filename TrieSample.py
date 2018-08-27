@@ -31,6 +31,9 @@ class Trie():
         if not word[0] in self.__trie_dict__:
             self.__trie_dict__[word[0]] = Node(word[0])
         current_node = self.__trie_dict__[word[0]]
+        if word_len == 1:
+            current_node.__word_end__ = True
+            return
         i = 1
         while i < word_len - 1:           
             if not current_node.__has_child__(word[i]):
@@ -45,9 +48,11 @@ class Trie():
     def find(self, word):
         word_len = len(word)
         if not word[0] in self.__trie_dict__:
-            return False        
-        i = 1
+            return False
         current_node = self.__trie_dict__[word[0]]
+        if word_len == 1 and current_node.__word_end__:
+            return True
+        i = 1
         while i < word_len -1:
             if not current_node.__has_child__(word[i]):
                 return False
@@ -116,13 +121,15 @@ if __name__ == "__main__":
     T = Trie()
     
     #Words to be added to the Trie.
-    words = ["app", "apple", "application", "appetite", "answer", "analog", "abormal", "abnormality", "advice", "addition", "additive", "approval", "appointment", "analogy", "ab",
+    words = ["a", "an", "app", "apple", "application", "appetite", "answer", "analog", "abormal", "abnormality", "advice", "addition", "additive", "approval", "appointment", "analogy", "ab",
              "abdonimal", "abdominals", "ask", "asking", "ban", "banana", "band", "bandit", "bandana", "boy", "boil", "buoyant", "add-on"]
 
     for w in words:
         T.add(w)
 
     print("Find \"a\": {}\n".format(T.find("a")))
+
+    print("Find \"b\": {}\n".format(T.find("b")))
     
     print("Find \"app\": {}\n".format(T.find("app")))
     
@@ -133,6 +140,9 @@ if __name__ == "__main__":
     print("Find \"applffes\": {}\n".format(T.find("applffes")))
 
     print("Find \"applffes\": {}\n".format(T.find("apples")))
+
+    print("Starts with \"a\"")  
+    T.starts_with("a")
 
     print("Starts with \"ap\"")  
     T.starts_with("ap")
