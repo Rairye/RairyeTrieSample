@@ -126,6 +126,7 @@ if __name__ == "__main__":
 
     for w in words:
         T.add(w)
+    print("\n\n")
 
     print("Find \"a\": {}\n".format(T.find("a")))
 
@@ -139,7 +140,7 @@ if __name__ == "__main__":
 
     print("Find \"applffes\": {}\n".format(T.find("applffes")))
 
-    print("Find \"applffes\": {}\n".format(T.find("apples")))
+    print("Find \"apples\": {}\n".format(T.find("apples")))
 
     print("Starts with \"a\"")  
     T.starts_with("a")
